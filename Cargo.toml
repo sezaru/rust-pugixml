@@ -1,0 +1,21 @@
+[package]
+name = "pugixml"
+version = "0.0.1"
+authors = ["Eduardo Barreto Alexandre <eduardob@ime.usp.br>"]
+description = "A Rust wrapper for pugixml"
+repository = "https://github.com/sezaru/rust-pugixml"
+documentation = ""
+readme = "README.md"
+license = "MIT"
+
+build = "build.rs"
+
+[dependencies]
+libc = "0.2.19"
+
+[build-dependencies]
+gcc = "0.3.41"
+
+[lib]
+name = "pugixml"
+
