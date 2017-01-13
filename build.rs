@@ -6,6 +6,5 @@ fn main()
         .file("wrapper/wrapper.cpp")
         .file("pugixml/src/pugixml.cpp")
         .include("pugixml/src")
-        .flag("-std=c++11")
         .compile("libpugixml.a")
 }
