@@ -78,15 +78,15 @@ extern "C" {
 int pugi_version() { return PUGIXML_VERSION; }
 
 // formatting option bit flags
-unsigned int pugi_formatflag_default() { return pugi::format_default; }
-unsigned int pugi_formatflag_indent() { return pugi::format_indent; }
-unsigned int pugi_formatflag_indent_attributes() { return pugi::format_indent_attributes; }
-unsigned int pugi_formatflag_no_empty_element_tags() { return pugi::format_no_empty_element_tags; }
-unsigned int pugi_formatflag_no_declaration() { return pugi::format_no_declaration; }
-unsigned int pugi_formatflag_no_escapes() { return pugi::format_no_escapes; }
-unsigned int pugi_formatflag_raw() { return pugi::format_raw; }
-unsigned int pugi_formatflag_save_file_text() { return pugi::format_save_file_text; }
-unsigned int pugi_formatflag_write_bom() { return pugi::format_write_bom; }
+unsigned int pugi_format_flag_default() { return pugi::format_default; }
+unsigned int pugi_format_flag_indent() { return pugi::format_indent; }
+unsigned int pugi_format_flag_indent_attributes() { return pugi::format_indent_attributes; }
+unsigned int pugi_format_flag_no_empty_element_tags() { return pugi::format_no_empty_element_tags; }
+unsigned int pugi_format_flag_no_declaration() { return pugi::format_no_declaration; }
+unsigned int pugi_format_flag_no_escapes() { return pugi::format_no_escapes; }
+unsigned int pugi_format_flag_raw() { return pugi::format_raw; }
+unsigned int pugi_format_flag_save_file_text() { return pugi::format_save_file_text; }
+unsigned int pugi_format_flag_write_bom() { return pugi::format_write_bom; }
 
 // parsing option bit flags
 unsigned int pugi_parse_flag_cdata() { return pugi::parse_cdata; }
