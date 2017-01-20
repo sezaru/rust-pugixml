@@ -5,4 +5,4 @@ pub use self::misc::version;
 mod misc;
 mod wrapper;
 mod helpers;
-mod tree;
+pub mod tree;
