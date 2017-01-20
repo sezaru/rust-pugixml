@@ -89,8 +89,8 @@ extern "C" {
                                          attribute_value: *const c_char)
         -> *mut CNode;
 
-    pub fn pugi_node_child_value(node: *mut CNode) -> *const c_char;
-    pub fn pugi_node_child_value_by_name(node: *mut CNode, name: *const c_char) -> *mut CNode;
+    // pub fn pugi_node_child_value(node: *mut CNode) -> *const c_char;
+    // pub fn pugi_node_child_value_by_name(node: *mut CNode, name: *const c_char) -> *mut CNode;
 
     pub fn pugi_node_attribute(node: *mut CNode, name: *const c_char) -> *mut CAttribute;
 
@@ -118,7 +118,6 @@ extern "C" {
     pub fn pugi_node_remove_attribute(node: *mut CNode, name: *const c_char) -> c_int;
     pub fn pugi_node_remove_child(node: *mut CNode, to_be_removed_child: *const CNode) -> c_int;
 
-    // pub fn pugi_node_print(node: *mut CNode,
     pub fn pugi_new_attribute() -> *mut CAttribute;
     pub fn pugi_delete_attr(attribute: *mut CAttribute);
 
@@ -127,6 +126,8 @@ extern "C" {
 
     pub fn pugi_attr_set_name(attribute: *mut CAttribute, name: *const c_char) -> c_int;
     pub fn pugi_attr_set_value(attribute: *mut CAttribute, value: *const c_char) -> c_int;
+
+    // pub fn pugi_node_print(node: *const CNode,
 
     // pub fn pugi_node_find_attribute_by_predicate
     // pub fn pugi_node_find_child_by_predicate
