@@ -1,7 +1,7 @@
 #[repr(C)]
 #[derive(Debug)]
 #[allow(dead_code)]
-pub enum NodeType {
+pub enum NodeKind {
     Null,
     Document,
     Element,

@@ -1,6 +1,6 @@
 use libc::{c_int, c_char, c_uint, size_t, ptrdiff_t};
 
-use tree::{ParseStatus, Encoding, NodeType};
+use tree::{ParseStatus, Encoding, NodeKind};
 
 use tree::node::CNode;
 use tree::document::CDocument;
@@ -65,8 +65,8 @@ extern "C" {
     pub fn pugi_node_equal(lhs: *mut CNode, rhs: *mut CNode) -> c_int;
 
     pub fn pugi_node_hash_value(node: *mut CNode) -> size_t;
+    pub fn pugi_node_type(node: *const CNode) -> NodeKind;
 
-    pub fn pugi_node_type(node: *mut CNode) -> NodeType;
     pub fn pugi_node_name(node: *mut CNode) -> *const c_char;
     pub fn pugi_node_value(node: *mut CNode) -> *const c_char;
 
@@ -110,8 +110,8 @@ extern "C" {
     pub fn pugi_node_prepend_attribute(node: *mut CNode, name: *const c_char, value: *const c_char)
         -> c_int;
 
-    pub fn pugi_node_append_child(node: *mut CNode, node_type: NodeType) -> *mut CNode;
-    pub fn pugi_node_prepend_child(node: *mut CNode, node_type: NodeType) -> *mut CNode;
+    pub fn pugi_node_append_child(node: *mut CNode, node_type: NodeKind) -> *mut CNode;
+    pub fn pugi_node_prepend_child(node: *mut CNode, node_type: NodeKind) -> *mut CNode;
 
     pub fn pugi_node_append_copy(node: *mut CNode, proto: *mut CNode) -> *mut CNode;
     pub fn pugi_node_prepend_copy(node: *mut CNode, proto: *mut CNode) -> *mut CNode;
