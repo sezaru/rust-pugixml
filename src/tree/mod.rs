@@ -1,4 +1,5 @@
 pub use self::node::Node;
+pub use self::node_base::*;
 pub use self::document::Document;
 pub use self::encoding::Encoding;
 pub use self::node_kind::NodeKind;
@@ -8,6 +9,7 @@ pub use self::parse_result::ParseResult;
 pub use self::format_option::FormatOption;
 
 pub mod node;
+mod node_base;
 pub mod document;
 mod encoding;
 mod node_kind;

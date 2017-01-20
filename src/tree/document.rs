@@ -1,41 +1,44 @@
-use std::ffi::CString;
+use libc::c_void;
 
-use wrapper::*;
+use std::ffi::CString;
 
 use tree::{ParseOption, ParseResult, Encoding, ParseStatus, FormatOption};
 
+use tree::NodeBase;
+
+use wrapper::*;
+
 pub enum CDocument {}
 
-#[derive(Debug)]
 pub struct Document {
-    doc_ptr: *mut CDocument,
+    ptr: *mut CDocument,
+}
+
+impl NodeBase for Document {
+    fn get_ptr(&self) -> *mut c_void {
+        self.ptr as *mut c_void
+    }
 }
 
 impl Drop for Document {
     fn drop(&mut self) {
         unsafe {
-            pugi_delete_document(self.doc_ptr);
+            pugi_delete_document(self.ptr);
         }
     }
 }
 
 impl Document {
-    pub fn new() -> Result<Self, ()> {
-        unsafe {
-            let document = pugi_new_document();
-            if document.is_null() {
-                Err(())
-            } else {
-                Ok(Document { doc_ptr: document })
-            }
+    fn new() -> Result<Self, ParseResult> {
+        let document = unsafe { pugi_new_document() };
+        if document.is_null() {
+            Err(ParseResult::default())
+        } else {
+            Ok(Document { ptr: document })
         }
     }
+}
 
-    pub fn load_file(self, path: &str, parse_options: Vec<ParseOption>, encoding: Encoding)
-        -> Result<Self, ParseResult> {
-        let combined_parse_options = parse_options.iter()
-            .fold(ParseOption::RawValue(0), |acc, x| acc | *x);
-        let c_path = CString::new(path).unwrap();
 
         unsafe {
             match ParseResult::new(pugi_load_file(self.doc_ptr,
