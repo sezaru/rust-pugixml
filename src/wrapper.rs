@@ -4,6 +4,7 @@ use tree::{ParseStatus, Encoding, NodeKind};
 
 use tree::node::CNode;
 use tree::document::CDocument;
+use tree::attribute::CAttribute;
 use tree::parse_result::CParseResult;
 
 extern "C" {
@@ -91,8 +92,8 @@ extern "C" {
     pub fn pugi_node_child_value(node: *mut CNode) -> *const c_char;
     pub fn pugi_node_child_value_by_name(node: *mut CNode, name: *const c_char) -> *mut CNode;
 
+    pub fn pugi_node_attribute(node: *mut CNode, name: *const c_char) -> *mut CAttribute;
 
-    // pub fn pugi_node_attribute(node: *mut CNode, name: *const c_char) -> *mut CAttribute;
     pub fn pugi_node_path(node: *const CNode, delimiter: c_char) -> *const c_char;
 
     pub fn pugi_node_first_element_by_path(node: *const CNode, path: *const c_char, delimiter: c_char)
@@ -118,6 +119,14 @@ extern "C" {
     pub fn pugi_node_remove_child(node: *mut CNode, to_be_removed_child: *const CNode) -> c_int;
 
     // pub fn pugi_node_print(node: *mut CNode,
+    pub fn pugi_new_attribute() -> *mut CAttribute;
+    pub fn pugi_delete_attr(attribute: *mut CAttribute);
+
+    pub fn pugi_attr_name(attribute: *const CAttribute) -> *const c_char;
+    pub fn pugi_attr_value(attribute: *const CAttribute) -> *const c_char;
+
+    pub fn pugi_attr_set_name(attribute: *mut CAttribute, name: *const c_char) -> c_int;
+    pub fn pugi_attr_set_value(attribute: *mut CAttribute, value: *const c_char) -> c_int;
 
     // pub fn pugi_node_find_attribute_by_predicate
     // pub fn pugi_node_find_child_by_predicate

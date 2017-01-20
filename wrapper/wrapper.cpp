@@ -152,12 +152,14 @@ pugi::xml_encoding pugi_parse_result_encoding(const ParseResult * r) { return r-
 const char * pugi_parse_result_description(const ParseResult * r) { return r->description(); }
 
 ////// methods of xml_attribute
+Attr * pugi_new_attribute() { return new pugi::xml_attribute(); }
 void pugi_delete_attr(const Attr * a) { delete a; }
 size_t pugi_attr_hash_value(const Attr * a) { return a->hash_value(); }
 
 const char * pugi_attr_name(const Attr * a) { return a->name(); }
 const char * pugi_attr_value(const Attr * a) { return a->value(); }
 
+int pugi_attr_set_name(Attr * a, const char * name) { return a->set_name(name); }
 int pugi_attr_set_value(Attr * a, const char * v) { return a->set_value(v); }
 
 ////// methods of node
