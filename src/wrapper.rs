@@ -1,4 +1,4 @@
-use libc::{c_int, c_char, c_uint, size_t, ptrdiff_t, c_double};
+use libc::{c_int, c_char, c_uint, size_t, ptrdiff_t};
 
 use tree::{ParseStatus, Encoding, NodeType};
 
