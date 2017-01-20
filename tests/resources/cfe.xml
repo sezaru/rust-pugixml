@@ -1,0 +1,123 @@
+<CFe>
+  <infCFe versaoDadosEnt="0.07">
+    <ide>
+      <CNPJ>10615281000140</CNPJ>
+      <signAC>SGR-SAT SISTEMA DE GESTAO E RETAGUARDA DO SAT</signAC>
+      <numeroCaixa>123</numeroCaixa>
+    </ide>
+    <emit>
+      <CNPJ>53485215000106</CNPJ>
+      <IE>111072115110</IE>
+      <IM>123123</IM>
+      <indRatISSQN>N</indRatISSQN>
+    </emit>
+    <dest>
+      <CNPJ>23309796000164</CNPJ>
+      <xNome>BrBrHue Informatica Ltda.</xNome>
+    </dest>
+    <entrega>
+      <xLgr>Rua Dona Brigida</xLgr>
+      <nro>713</nro>
+      <xCpl>A</xCpl>
+      <xBairro>Vila Mariana</xBairro>
+      <xMun>São Paulo</xMun>
+      <UF>SP</UF>
+    </entrega>
+    <det nItem="1">
+      <prod>
+        <cProd>0022</cProd>
+        <xProd>Pao Forma Integral Light</xProd>
+        <NCM>61071200</NCM>
+        <CFOP>5022</CFOP>
+        <uCom>un</uCom>
+        <qCom>1.0000</qCom>
+        <vUnCom>2.000</vUnCom>
+        <indRegra>A</indRegra>
+      </prod>
+      <imposto>
+        <ICMS>
+          <ICMS00>
+            <Orig>0</Orig>
+            <CST>00</CST>
+            <pICMS>0.30</pICMS>
+          </ICMS00>
+        </ICMS>
+        <PIS>
+          <PISAliq>
+            <CST>02</CST>
+            <vBC>50.00</vBC>
+            <pPIS>0.0250</pPIS>
+          </PISAliq>
+        </PIS>
+        <PISST>
+          <vBC>50.00</vBC>
+          <pPIS>0.0250</pPIS>
+        </PISST>
+        <COFINS>
+          <COFINSAliq>
+            <CST>02</CST>
+            <vBC>50.00</vBC>
+            <pCOFINS>0.0250</pCOFINS>
+          </COFINSAliq>
+        </COFINS>
+        <COFINSST>
+          <vBC>50.00</vBC>
+          <pCOFINS>0.0250</pCOFINS>
+        </COFINSST>
+      </imposto>
+    </det>
+
+    <det nItem="2">
+      <prod>
+        <cProd>0022</cProd>
+        <xProd>Pao Forma Integral Light</xProd>
+        <NCM>61071200</NCM>
+        <CFOP>5022</CFOP>
+        <uCom>un</uCom>
+        <qCom>3.0000</qCom>
+        <vUnCom>4.000</vUnCom>
+        <indRegra>A</indRegra>
+      </prod>
+      <imposto>
+        <ICMS>
+          <ICMS00>
+            <Orig>0</Orig>
+            <CST>00</CST>
+            <pICMS>0.30</pICMS>
+          </ICMS00>
+        </ICMS>
+        <PIS>
+          <PISAliq>
+            <CST>02</CST>
+            <vBC>50.00</vBC>
+            <pPIS>0.0250</pPIS>
+          </PISAliq>
+        </PIS>
+        <PISST>
+          <vBC>50.00</vBC>
+          <pPIS>0.0250</pPIS>
+        </PISST>
+        <COFINS>
+          <COFINSAliq>
+            <CST>02</CST>
+            <vBC>50.00</vBC>
+            <pCOFINS>0.0250</pCOFINS>
+          </COFINSAliq>
+        </COFINS>
+        <COFINSST>
+          <vBC>50.00</vBC>
+          <pCOFINS>0.0250</pCOFINS>
+        </COFINSST>
+      </imposto>
+    </det>
+
+    <total/>
+    <pgto>
+      <MP>
+        <cMP>01</cMP>
+        <vMP>1.00</vMP>
+        <cAdmC>025</cAdmC>
+      </MP>
+    </pgto>
+  </infCFe>
+</CFe>
