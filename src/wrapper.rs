@@ -64,7 +64,6 @@ extern "C" {
 
     pub fn pugi_node_equal(lhs: *const CNode, rhs: *const CNode) -> c_int;
 
-    pub fn pugi_node_hash_value(node: *mut CNode) -> size_t;
     pub fn pugi_node_type(node: *const CNode) -> NodeKind;
     pub fn pugi_node_name(node: *const CNode) -> *const c_char;
     pub fn pugi_node_value(node: *const CNode) -> *const c_char;
