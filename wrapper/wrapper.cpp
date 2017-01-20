@@ -181,7 +181,7 @@ Node * pugi_node_previous_sibling(const Node * n)
   return detail::check_new_node(n->previous_sibling());
 }
 
-Node * pugi_node_child(const Node * n, const char * name)
+Node * pugi_node_child_by_name(const Node * n, const char * name)
 {
   return detail::check_new_node(n->child(name));
 }
