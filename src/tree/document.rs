@@ -39,45 +39,102 @@ impl Document {
     }
 }
 
+#[derive(PartialEq)]
+enum DataType {
+    File,
+    String,
+    None,
+}
 
-        unsafe {
-            match ParseResult::new(pugi_load_file(self.doc_ptr,
-                                                  c_path.as_ptr(),
-                                                  combined_parse_options.value(),
-                                                  encoding)) {
-                Ok(result) => {
-                    match result.status {
-                        ParseStatus::Ok => Ok(self),
-                        _ => Err(result),
-                    }
-                }
-                _ => Err(ParseResult::default()),
-            }
+pub struct DocumentBuilder {
+    parse_options: Vec<ParseOption>,
+    encoding: Encoding,
+    data_type: DataType,
+    data: String,
+}
+
+impl DocumentBuilder {
+    pub fn new() -> DocumentBuilder {
+        DocumentBuilder {
+            parse_options: vec![],
+            encoding: Encoding::Auto,
+            data_type: DataType::None,
+            data: String::new(),
         }
     }
 
-    pub fn load_buffer(self, contents: &str, parse_options: Vec<ParseOption>, encoding: Encoding)
-        -> Result<Self, ParseResult> {
-        let combined_parse_options = parse_options.iter()
-            .fold(ParseOption::RawValue(0), |acc, x| acc | *x);
-        let c_contents = CString::new(contents).unwrap();
+    pub fn from_file(mut self, path: &str) -> DocumentBuilder {
+        self.data_type = DataType::File;
+        self.data = path.to_string();
+        self
+    }
 
-        unsafe {
-            match ParseResult::new(pugi_load_buffer(self.doc_ptr,
-                                                    c_contents.as_ptr(),
-                                                    contents.len(),
-                                                    combined_parse_options.value(),
-                                                    encoding)) {
-                Ok(result) => {
-                    match result.status {
-                        ParseStatus::Ok => Ok(self),
-                        _ => Err(result),
+    pub fn from_string(mut self, string: &str) -> DocumentBuilder {
+        self.data_type = DataType::String;
+        self.data = string.to_string();
+        self
+    }
+
+    pub fn encoded_in(mut self, encoding: Encoding) -> DocumentBuilder {
+        self.encoding = encoding;
+        self
+    }
+
+    pub fn with_parse_option(mut self, parse_option: ParseOption) -> DocumentBuilder {
+        self.parse_options.push(parse_option);
+        self
+    }
+
+    pub fn finish(&self) -> Result<Document, ParseResult> {
+        let combined_parse_options = if self.parse_options.is_empty() {
+            ParseOption::Default
+        } else {
+            self.parse_options
+                .iter()
+                .fold(ParseOption::RawValue(0), |acc, x| acc | *x)
+        };
+        let c_data = CString::new(&self.data as &str).unwrap();
+
+        let document = try!(Document::new());
+
+        match self.data_type {
+            DataType::File => {
+                match ParseResult::new(unsafe {
+                    pugi_load_file(document.ptr,
+                                   c_data.as_ptr(),
+                                   combined_parse_options.value(),
+                                   self.encoding)
+                }) {
+                    Ok(result) => {
+                        match result.status {
+                            ParseStatus::Ok => Ok(document),
+                            _ => Err(result),
+                        }
                     }
+                    _ => Err(ParseResult::default()),
                 }
-                _ => Err(ParseResult::default()),
             }
+            DataType::String => {
+                match ParseResult::new(unsafe {
+                    pugi_load_buffer(document.ptr,
+                                     c_data.as_ptr(),
+                                     self.data.len(),
+                                     combined_parse_options.value(),
+                                     self.encoding)
+                }) {
+                    Ok(result) => {
+                        match result.status {
+                            ParseStatus::Ok => Ok(document),
+                            _ => Err(result),
+                        }
+                    }
+                    _ => Err(ParseResult::default()),
+                }
+            }
+            DataType::None => Document::new(),
         }
     }
+}
 
     pub fn save_file(self, path: &str, indent_string: &str, format_options: Vec<FormatOption>,
                      encoding: Encoding)

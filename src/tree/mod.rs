@@ -1,6 +1,7 @@
 pub use self::node::Node;
 pub use self::node_base::*;
 pub use self::document::Document;
+pub use self::document::DocumentBuilder;
 pub use self::encoding::Encoding;
 pub use self::node_kind::NodeKind;
 pub use self::parse_option::ParseOption;
