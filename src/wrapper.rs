@@ -46,7 +46,7 @@ extern "C" {
     pub fn pugi_new_document() -> *mut CDocument;
     pub fn pugi_delete_document(document: *mut CDocument);
 
-    pub fn pugi_reset_document_with(document: *mut CDocument, proto: *mut CDocument);
+    pub fn pugi_reset_document_with(document: *mut CDocument, proto: *const CDocument);
 
     pub fn pugi_load_file(document: *mut CDocument, path: *const c_char, options: c_uint,
                       encoding: Encoding)
@@ -56,51 +56,50 @@ extern "C" {
                         options: c_uint, encoding: Encoding)
         -> *const CParseResult;
 
-    pub fn pugi_save_file(document: *mut CDocument, path: *const c_char, indent: *const c_char,
+    pub fn pugi_save_file(document: *const CDocument, path: *const c_char, indent: *const c_char,
                       options: c_uint, encoding: Encoding)
         -> c_int;
 
     pub fn pugi_delete_node(node: *mut CNode);
 
-    pub fn pugi_node_equal(lhs: *mut CNode, rhs: *mut CNode) -> c_int;
+    pub fn pugi_node_equal(lhs: *const CNode, rhs: *const CNode) -> c_int;
 
     pub fn pugi_node_hash_value(node: *mut CNode) -> size_t;
     pub fn pugi_node_type(node: *const CNode) -> NodeKind;
+    pub fn pugi_node_name(node: *const CNode) -> *const c_char;
+    pub fn pugi_node_value(node: *const CNode) -> *const c_char;
 
-    pub fn pugi_node_name(node: *mut CNode) -> *const c_char;
-    pub fn pugi_node_value(node: *mut CNode) -> *const c_char;
+    pub fn pugi_node_text(node: *const CNode) -> *const c_char;
 
-    pub fn pugi_node_parent(node: *mut CNode) -> *mut CNode;
-    pub fn pugi_node_child(node: *mut CNode, name: *const c_char) -> *mut CNode;
+    pub fn pugi_node_parent(node: *const CNode) -> *mut CNode;
+    pub fn pugi_node_child_by_name(node: *const CNode, name: *const c_char) -> *mut CNode;
 
-    pub fn pugi_node_first_child(node: *mut CNode) -> *mut CNode;
-    pub fn pugi_node_last_child(node: *mut CNode) -> *mut CNode;
-    pub fn pugi_node_next_sibling(node: *mut CNode) -> *mut CNode;
-    pub fn pugi_node_previous_sibling(node: *mut CNode) -> *mut CNode;
-    pub fn pugi_node_next_sibling_by_name(node: *mut CNode, name: *const c_char) -> *mut CNode;
-    pub fn pugi_node_previous_sibling_by_name(node: *mut CNode, name: *const c_char) -> *mut CNode;
+    pub fn pugi_node_first_child(node: *const CNode) -> *mut CNode;
+    pub fn pugi_node_last_child(node: *const CNode) -> *mut CNode;
+    pub fn pugi_node_next_sibling(node: *const CNode) -> *mut CNode;
+    pub fn pugi_node_previous_sibling(node: *const CNode) -> *mut CNode;
+    pub fn pugi_node_next_sibling_by_name(node: *const CNode, name: *const c_char) -> *mut CNode;
+    pub fn pugi_node_previous_sibling_by_name(node: *const CNode, name: *const c_char) -> *mut CNode;
 
-    pub fn pugi_node_find_child_by_name_and_attribute(node: *mut CNode, name: *const c_char,
+    pub fn pugi_node_find_child_by_name_and_attribute(node: *const CNode, name: *const c_char,
                                                   attribute_name: *const c_char,
                                                   attribute_value: *const c_char)
         -> *mut CNode;
-    pub fn pugi_node_find_child_by_attribute(node: *mut CNode, attribute_name: *const c_char,
+    pub fn pugi_node_find_child_by_attribute(node: *const CNode, attribute_name: *const c_char,
                                          attribute_value: *const c_char)
         -> *mut CNode;
 
     pub fn pugi_node_child_value(node: *mut CNode) -> *const c_char;
     pub fn pugi_node_child_value_by_name(node: *mut CNode, name: *const c_char) -> *mut CNode;
 
-    pub fn pugi_node_text(node: *mut CNode) -> *const c_char;
 
     // pub fn pugi_node_attribute(node: *mut CNode, name: *const c_char) -> *mut CAttribute;
+    pub fn pugi_node_path(node: *const CNode, delimiter: c_char) -> *const c_char;
 
-    pub fn pugi_node_path(node: *mut CNode) -> *const c_char;
-
-    pub fn pugi_node_first_element_by_path(node: *mut CNode, path: *const c_char, del: c_char)
+    pub fn pugi_node_first_element_by_path(node: *const CNode, path: *const c_char, delimiter: c_char)
         -> *mut CNode;
 
-    pub fn pugi_node_root(node: *mut CNode) -> *mut CNode;
+    pub fn pugi_node_root(node: *const CNode) -> *mut CNode;
 
     pub fn pugi_node_set_name(node: *mut CNode, name: *const c_char) -> c_int;
     pub fn pugi_node_set_value(node: *mut CNode, name: *const c_char) -> c_int;
@@ -117,7 +116,7 @@ extern "C" {
     pub fn pugi_node_prepend_copy(node: *mut CNode, proto: *mut CNode) -> *mut CNode;
 
     pub fn pugi_node_remove_attribute(node: *mut CNode, name: *const c_char) -> c_int;
-    pub fn pugi_node_remove_child(node: *mut CNode, to_be_removed_child: *mut CNode) -> c_int;
+    pub fn pugi_node_remove_child(node: *mut CNode, to_be_removed_child: *const CNode) -> c_int;
 
     // pub fn pugi_node_print(node: *mut CNode,
 
