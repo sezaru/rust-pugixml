@@ -136,13 +136,6 @@ impl DocumentBuilder {
     }
 }
 
-    pub fn save_file(self, path: &str, indent_string: &str, format_options: Vec<FormatOption>,
-                     encoding: Encoding)
-        -> Result<Self, ()> {
-        let combined_format_options = format_options.iter()
-            .fold(FormatOption::RawValue(0), |acc, x| acc | *x);
-        let c_path = CString::new(path).unwrap();
-        let c_indent_string = CString::new(indent_string).unwrap();
 pub fn reset_with(document: Document, other: &Document) -> Result<Document, ()> {
     unsafe {
         pugi_reset_document_with(document.ptr, other.ptr);
@@ -150,15 +143,22 @@ pub fn reset_with(document: Document, other: &Document) -> Result<Document, ()> 
     Ok(document)
 }
 
-        unsafe {
-            match pugi_save_file(self.doc_ptr,
-                                 c_path.as_ptr(),
-                                 c_indent_string.as_ptr(),
-                                 combined_format_options.value(),
-                                 encoding) {
-                1 => Ok(self),
-                _ => Err(()),
-            }
-        }
+pub fn to_file(document: &Document, path: &str, indent_string: &str,
+               format_options: Vec<FormatOption>, encoding: Encoding)
+    -> bool {
+    let combined_format_options = format_options.iter()
+        .fold(FormatOption::RawValue(0), |acc, x| acc | *x);
+    let c_path = CString::new(path).unwrap();
+    let c_indent_string = CString::new(indent_string).unwrap();
+
+    match unsafe {
+        pugi_save_file(document.ptr,
+                       c_path.as_ptr(),
+                       c_indent_string.as_ptr(),
+                       combined_format_options.value(),
+                       encoding)
+    } {
+        1 => true,
+        _ => false,
     }
 }
