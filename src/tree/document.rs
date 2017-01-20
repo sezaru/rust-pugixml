@@ -143,6 +143,12 @@ impl DocumentBuilder {
             .fold(FormatOption::RawValue(0), |acc, x| acc | *x);
         let c_path = CString::new(path).unwrap();
         let c_indent_string = CString::new(indent_string).unwrap();
+pub fn reset_with(document: Document, other: &Document) -> Result<Document, ()> {
+    unsafe {
+        pugi_reset_document_with(document.ptr, other.ptr);
+    }
+    Ok(document)
+}
 
         unsafe {
             match pugi_save_file(self.doc_ptr,
